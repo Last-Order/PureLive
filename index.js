@@ -1,9 +1,16 @@
 // ==UserScript==
 // @name PureLive
+// @version 0.0.1
+// @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
 // @grant none
 // ==/UserScript==
+
+/**
+ * WARNING
+ * 本脚本仅支持 Violentmonkey Scripts
+ */
 $(document).ready(() => {
   const zhanqi = () => {
     $('.live-chat-content').remove(); // 聊天窗口
@@ -20,6 +27,7 @@ $(document).ready(() => {
     .room-rank-ibox,.ranking-btn {display: none !important;} /* 排名展示和排名按钮 */\
     </style>')
     $('html > head').append(styleTag);
+    $(window).trigger('resize');
   }
   
   switch(location.host){
