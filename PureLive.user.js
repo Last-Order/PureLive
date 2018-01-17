@@ -1,10 +1,13 @@
 // ==UserScript==
 // @name PureLive
-// @version 0.0.2
+// @version 1.0.0
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
+// @exclude https://www.zhanqi.tv/topic/*
 // @include https://www.showroom-live.com/*
+// @include https://live.bilibili.com/*
+// @include https://www.douyu.com/*
 // @grant none
 // ==/UserScript==
 
@@ -24,9 +27,10 @@ $(document).ready(() => {
     $('.js-room-fun-area').remove(); // 礼物区域
     $('.sdk-zhanqiMall').remove(); // 商城按钮
     $('.anchor-info-area').remove(); // 主播信息
+    $('.hot-tg').remove(); // 热门推广
     applyCSS(`<style>
     .no-play-down-ibox {display: none !important;} /* 客户端下载广告 */
-    #js-flash-layer {width: 100vw !important; height: 100vh !important;} /* 拉伸播放器 */
+    #js-flash-layer {width: 99vw !important; height: 100vh !important;} /* 拉伸播放器 */
     .live-room-content {padding: 0 !important;} /* 砍掉主容器左内间距 */
     .sdk-zhanqiMall {display: none !important;} /* 商城按钮 */
     .room-rank-ibox,.ranking-btn {display: none !important;} /* 排名展示和排名按钮 */
@@ -45,6 +49,26 @@ $(document).ready(() => {
       .l-room-video {position: relative !important; }
     </style>`);
   }
+
+  const bilibili = () => {
+    applyCSS(`<style>
+      .bilibili-live-player-video-gift { display: none !important; } /* 覆盖播放器的礼物横幅 */
+    </style>`)
+  }
+
+  const douyu = () => {
+    applyCSS(`<style>
+      .left-menu { display: none !important; } /* 弱智左边栏 */
+      #js-stats-and-actions { display: none !important; } /* 礼物投喂和任务 */
+      #js-live-room-normal-right  { display: none !important; } /* 聊天区域 */
+      #anchor-info { display: none !important; } /* 主播信息 */
+      #header { display: none !important; } /* 顶栏 */
+      #container { margin-top: -50px; } /* 填补顶栏 */
+      #mainbody { margin-left: 0 !important; padding: 0 !important; } /* 播放器拉伸 填补 */
+      #js-room-video { margin: 0 !important; overflow: visible !important;}
+      #douyu_room_normal_flash_proxy_box, #douyu_room_normal_flash_proxy_box object, #douyu_room_normal_flash_proxy_box video { width: 99vw; height: 100vh; }
+    </style>`)
+  }
   
   switch(location.host){
     case 'www.zhanqi.tv':
@@ -52,5 +76,10 @@ $(document).ready(() => {
       zhanqi(); break;
     case 'www.showroom-live.com':
       showroom(); break;
+    case 'live.bilibili.com':
+      bilibili(); break;
+    case 'douyu.com':
+    case 'www.douyu.com':
+      douyu(); break;
   }
 });
