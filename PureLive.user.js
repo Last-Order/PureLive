@@ -8,6 +8,7 @@
 // @include https://www.showroom-live.com/*
 // @include https://live.bilibili.com/*
 // @include https://www.douyu.com/*
+// @exclude https://www.douyu.com/
 // @grant none
 // ==/UserScript==
 
