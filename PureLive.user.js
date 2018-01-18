@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name PureLive
-// @version 1.0.1
+// @version 1.0.2
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
@@ -46,9 +46,49 @@ $(document).ready(() => {
       #gift-area, #gift-log  { display: none !important; }  /* 礼物区域 */
       #event-and-support-area  { display: none !important; }  /* 活动和赞助区域 */
       .l-room-footer { display: none !important; }  /* 底栏 */
-      .room-inner {background-image: none !important;} /* 垃圾背景图 */
-      .l-room-video {position: relative !important; }
+      .remove-background {background-image: none !important;} /* 垃圾背景图 */
+      .l-publicity-banner { display: none !important; }  /* banner */
+      .l-room-video {left: 0 !important; margin-left: 0;} /* 以下三行是拉伸播放器 */
+      #js-room-video { width: auto !important; height: auto !important;}
+      #js-video { width: 99vw !important; height: 70vh !important;}
+      #js-room-comment-wrapper { top: 85vh !important; opacity: 0.5; } /* 调整评论框位置 */
+      #js-room-comment-wrapper:hover { opacity: 1 }
+      .l-room-youtube { text-align: center; }
     </style>`);
+    $('.room-inner').addClass('remove-background');
+    // 背景太黑 所以搞个自定义背景
+    $('.l-wrapper').on(
+      'dragover',
+      function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    )
+    $('.l-wrapper').on(
+      'dragenter',
+      function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    )
+    $('.l-wrapper').on(
+      'drop',
+      function (e) {
+        if (e.originalEvent.dataTransfer) {
+          if (e.originalEvent.dataTransfer.files.length) {
+            e.preventDefault();
+            e.stopPropagation();
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(e.originalEvent.dataTransfer.files[0]);
+            fileReader.onloadend = () => {
+              $('.room-inner').removeClass('remove-background');
+              $('#js-room-section').removeAttr('style');
+              $('#js-room-section').css('background-image', `url(${fileReader.result})`);
+            }
+          }
+        }
+      }
+    );
   }
 
   const bilibili = () => {
@@ -70,8 +110,8 @@ $(document).ready(() => {
       #douyu_room_normal_flash_proxy_box, #douyu_room_normal_flash_proxy_box object, #douyu_room_normal_flash_proxy_box video { width: 99vw; height: 100vh; }
     </style>`)
   }
-  
-  switch(location.host){
+
+  switch (location.host) {
     case 'www.zhanqi.tv':
     case 'zhanqi.tv':
       zhanqi(); break;
