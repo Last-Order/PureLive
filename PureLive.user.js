@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name PureLive
-// @version 1.0.3
+// @version 1.0.4
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
@@ -29,6 +29,7 @@ $(document).ready(() => {
     $('.sdk-zhanqiMall').remove(); // 商城按钮
     $('.anchor-info-area').remove(); // 主播信息
     $('.hot-tg').remove(); // 热门推广
+    $('.shrink-icon').remove(); // 主播任务
     applyCSS(`<style>
     .no-play-down-ibox {display: none !important;} /* 客户端下载广告 */
     #js-flash-layer {width: 99vw !important; height: 100vh !important;} /* 拉伸播放器 */
