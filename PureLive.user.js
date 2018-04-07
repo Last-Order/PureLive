@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name PureLive
-// @version 1.0.5
+// @version 1.0.6
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
@@ -10,6 +10,8 @@
 // @include https://www.douyu.com/*
 // @exclude https://www.douyu.com/
 // @grant none
+// @downloadURL https://github.com/Last-Order/PureLive/raw/master/PureLive.user.js
+// @updateURL https://github.com/Last-Order/PureLive/raw/master/PureLive.metas.js
 // ==/UserScript==
 
 /**
