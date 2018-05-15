@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name PureLive
-// @version 1.0.6
+// @version 1.0.7
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
@@ -39,6 +39,7 @@ $(document).ready(() => {
     .room-rank-ibox,.ranking-btn {display: none !important;} /* 排名展示和排名按钮 */
     .zb-task .zb-task-entrance { display: none !important } /* 主播任务 */
     .shrink-icon { display: none !important } /* 主播任务 */
+    .js-room-guide-panel { display: none !important } /* 引导窗口 */
     </style>`);
     $(window).trigger('resize');
   }
@@ -97,6 +98,7 @@ $(document).ready(() => {
   const bilibili = () => {
     applyCSS(`<style>
       .bilibili-live-player-video-gift { display: none !important; } /* 覆盖播放器的礼物横幅 */
+      .speaking-bubbles { display: none !important; } /* 礼物弹窗 */
     </style>`)
   }
 
@@ -110,7 +112,9 @@ $(document).ready(() => {
       #container { margin-top: -50px; } /* 填补顶栏 */
       #mainbody { margin-left: 0 !important; padding: 0 !important; } /* 播放器拉伸 填补 */
       #js-room-video { margin: 0 !important; overflow: visible !important;}
-      #douyu_room_normal_flash_proxy_box, #douyu_room_normal_flash_proxy_box object, #douyu_room_normal_flash_proxy_box video { width: 99vw; height: 100vh; }
+      #douyu_room_normal_flash_proxy_box, #douyu_room_normal_flash_proxy_box object, #douyu_room_normal_flash_proxy_box video {
+         width: 99vw !important; height: 100vh !important; 
+      }
       .room-ad-top  { display: none !important; } /* 顶部广告 */
       .noble-face-wrap { display: none !important; } /* 贵族主播活动 */
       </style>`)
