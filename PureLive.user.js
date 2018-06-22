@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name PureLive
-// @version 1.0.7
+// @version 1.0.8
 // @description:zh-cn 移除直播网站广告
 // @namespace Violentmonkey Scripts
 // @include https://www.zhanqi.tv/*   
@@ -97,7 +97,7 @@ $(document).ready(() => {
 
   const bilibili = () => {
     applyCSS(`<style>
-      .bilibili-live-player-video-gift { display: none !important; } /* 覆盖播放器的礼物横幅 */
+      .announcement-wrapper { display: none !important; } /* 覆盖播放器的礼物横幅 */
       .speaking-bubbles { display: none !important; } /* 礼物弹窗 */
     </style>`)
   }
